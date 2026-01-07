@@ -269,7 +269,8 @@ const fileSystem = {
         items: [
             { id: 'websites', name: 'Websites', type: 'folder', icon: 'img/file_icon.png' },
             { id: 'graphics', name: 'Graphics', type: 'folder', icon: 'img/file_icon.png' },
-            { id: 'unity', name: 'Game', type: 'folder', icon: 'img/file_icon.png' }
+            { id: 'unity', name: 'Game', type: 'folder', icon: 'img/file_icon.png' },
+            { id: 'unity', name: 'Media', type: 'folder', icon: 'img/file_icon.png' }
         ]
     },
     'websites': {
@@ -342,6 +343,49 @@ As a national competitor and a coach for the Under-19 youth team, I realized the
                 type: 'link',
                 url: 'doc/COMP1150_GDT_Report_Isaak.pdf', // Ensure this path is correct relative to index.html
                 icon: 'img/file_icon.png'
+            }
+        ]
+    },
+        'websites': {
+        name: 'Websites',
+        parent: 'root',
+        path: 'C:\\My Documents\\Projects\\Websites',
+        items: [
+            {
+                id: 'nationals',
+                name: 'uwhnationalsau.html',
+                type: 'link',
+                url: 'https://www.facebook.com/uwhnationalsau',
+                icon: 'img/chrome_icon.png'
+            },
+            {
+                id: 'nswuwh',
+                name: 'NSW_UWH.html',
+                type: 'link',
+                url: 'https://www.facebook.com/nswunderwaterhockey/',
+                icon: 'img/chrome_icon.png'
+            },
+            {
+                id: 'sydkings',
+                name: 'syd_kings.html',
+                type: 'link',
+                url: 'https://www.facebook.com/sydneyuwh/',
+                icon: 'img/chrome_icon.png'
+            },
+            // --- NEW ITEM START ---
+            {
+                id: 'readme',
+                name: 'README.txt',
+                type: 'text',
+                icon: 'img/file_icon.png', // Or use a specific text file icon if you have one
+                content: `PROJECT NOTES:
+------------------------------------------
+SOCIAL MEDIA
+1. Australian Underwater Hockey National Championships - 1.4k followers
+2. NSW Underwater Hockey - 380 followers
+3. Sydney Kings Underwater Hockey - 1.2k followers
+
+I manage these pages by tailoring content to three distinct levels of the sport’s community. My approach balances high-stakes tournament coverage for the National Championships, administrative updates and recruitment for NSW state members, and social, club-focused engagement for the Sydney Kings. By cross-promoting events and synchronizing messaging, I maintain a cohesive digital presence that keeps followers informed, connected, and growing across all tiers of the sport.`
             }
         ]
     }
@@ -658,4 +702,5 @@ function toggleCRT() {
             btn.style.background = ''; // Default state
         }
     }
+
 }
