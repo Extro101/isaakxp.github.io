@@ -1,0 +1,1337 @@
+/* ==================================================
+   XP-style CSS — reorganized and tidied
+   - Grouped by purpose: variables, globals, layout,
+     UI components, start menu, login, explorer, gallery
+   - Duplicate selectors merged and whitespace normalized
+   ================================================== */
+
+:root {
+    --xp-blue: #0058e3;
+    --xp-blue-dark: #003096;
+    --xp-green: #3c813f;
+    --xp-silver: #ece9d8;
+    --xp-window-border: #0054e3;
+}
+
+/* -------------------------
+   Global / Base styles
+   ------------------------- */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Tahoma', sans-serif;
+    background-image: url('img/xp_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Scrollbar (global) */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--xp-silver);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 2px solid var(--xp-silver);
+    box-shadow: inset 1px 1px white, inset -1px -1px #808080;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+/* -------------------------
+   Taskbar + Start button
+   ------------------------- */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+    background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.start-button {
+    height: 100%;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    background: linear-gradient(to bottom, #388e3c 0%, #4caf50 10%, #388e3c 100%);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.start-button:hover {
+    filter: brightness(1.1);
+}
+
+.taskbar-item-icon,
+.header-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+#clock {
+    margin-left: auto;
+    color: white;
+    padding: 0 10px;
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(to bottom, #0997ff 0%, #0053ee 100%);
+}
+
+.fullscreen-btn {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(to bottom, #0aa0ff 0%, #0060d0 100%);
+}
+
+.fullscreen-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* -------------------------
+   Window / Dialog styles
+   ------------------------- */
+.window {
+    position: absolute;
+    background: var(--xp-silver);
+    border: 3px solid var(--xp-window-border);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    min-width: 300px;
+    min-height: 120px;
+    resize: both;
+    overflow: hidden;
+}
+
+.window-header {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    background: linear-gradient(to bottom, #0058e3 0%, #3b8df1 10%, #0058e3 100%);
+    cursor: move;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.control-btn {
+    width: 21px;
+    height: 21px;
+    border: 1px solid white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.control-btn.btn-min,
+.control-btn.btn-max {
+    background: #0058e3;
+}
+
+.control-btn.btn-close {
+    background: #e81123;
+}
+
+.window-body {
+    padding: 10px;
+    background: white;
+    margin: 2px;
+    border: 1px solid #7f9db9;
+    height: calc(100% - 38px);
+    overflow-y: auto;
+}
+
+/* Window menu */
+.win-menu {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-right: 6px;
+}
+
+.menu-btn {
+    position: relative;
+    padding: 2px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #000;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-btn.menu-disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    color: #111;
+    border: 1px solid #ccc;
+    min-width: 110px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 10001;
+}
+
+.menu-btn.open .menu-dropdown {
+    display: block;
+}
+
+.menu-action {
+    padding: 6px 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.menu-action:hover {
+    background: #eef2ff;
+}
+
+.menu-action.disabled {
+    color: #888;
+    cursor: default;
+}
+
+/* -------------------------
+   Desktop icons / File items
+   ------------------------- */
+.desktop-icon {
+    width: 80px;
+    margin: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+.desktop-icon img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desktop-icon:hover span {
+    background: rgba(0, 84, 227, 0.5);
+}
+
+.file-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 15px;
+}
+
+.file-item {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 5px;
+}
+
+.file-item:hover {
+    background-color: #e8f3ff;
+    border-color: #b2d6f8;
+}
+
+.file-item:active {
+    background-color: #c4e3ff;
+    border-color: #2e6db5;
+}
+
+.file-icon-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 4px;
+}
+
+.file-name {
+    font-size: 11px;
+    text-align: center;
+    word-wrap: break-word;
+    color: black;
+    line-height: 1.2;
+}
+
+.file-item:hover .file-name {
+    color: #003399;
+}
+
+/* -------------------------
+   Start menu (classic XP-ish)
+   ------------------------- */
+/* --- Optimized Start Menu --- */
+#startMenu {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 380px;
+    /* Fixed standard width */
+    background: #1e52b7;
+    /* Dark blue border shadow */
+    border: 1px solid #003096;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.4);
+    display: none;
+    flex-direction: column;
+    z-index: 10000;
+    font-family: 'Tahoma', sans-serif;
+    overflow: hidden;
+}
+
+/* Header with User Icon */
+.xp-start-header {
+    height: 65px;
+    background: linear-gradient(to bottom, #1d5edb 0%, #3a8df5 100%);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #1048a9;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.start-header-user-icon {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.start-header-name {
+    color: white;
+    font-weight: bold;
+    margin-left: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+/* Body: Two-Column Layout */
+.xp-start-body {
+    display: flex;
+    background: #d3e5fa;
+    /* Right column blue */
+    border-top: 1px solid #3b8df1;
+}
+
+.xp-left-col {
+    flex: 1.1;
+    background: white;
+    padding: 8px 0;
+}
+
+.xp-right-col {
+    flex: 0.9;
+    background: #d3e5fa;
+    border-left: 1px solid #95bdee;
+    padding: 8px 0;
+    color: #001e4e;
+}
+
+/* Menu Items */
+.start-item,
+.start-item-sm {
+    display: flex;
+    align-items: center;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.start-item:hover,
+.start-item-sm:hover {
+    background: #316ac5;
+    color: white !important;
+}
+
+.start-item:hover .start-subtext {
+    color: #cfe2ff !important;
+}
+
+.start-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.start-subtext {
+    font-size: 10px;
+    color: #777;
+}
+
+/* Footer with Logout/Shutdown */
+.xp-start-footer {
+    height: 42px;
+    background: linear-gradient(to bottom, #3b8df1 0%, #1e5dbc 100%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    border-top: 1px solid #f68c2d;
+}
+
+.xp-footer-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.xp-footer-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+/* -------------------------
+   Sidebar task boxes
+   ------------------------- */
+.xp-task-box {
+    background: white;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+    background: linear-gradient(to right, #055fe0 0%, #055fe0 30%, #4791ed 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 4px 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.task-header:hover {
+    filter: brightness(1.1);
+}
+
+.task-arrow {
+    font-size: 9px;
+}
+
+.task-content {
+    padding: 8px;
+    background: #d6dff7;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #003399;
+    padding: 3px 0;
+    cursor: pointer;
+}
+
+.task-item:hover {
+    text-decoration: underline;
+    color: #001155;
+}
+
+.task-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* -------------------------
+   Projects / Cards
+   ------------------------- */
+.project-card {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #f9f9f9;
+}
+
+.project-card:hover {
+    border-color: #0054e3;
+    background: #eff5ff;
+}
+
+.project-logo {
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.project-thumb {
+    cursor: pointer;
+}
+
+.project-more {
+    transition: max-height 0.18s ease-in-out;
+}
+
+.read-more-btn {
+    cursor: pointer;
+}
+
+/* -------------------------
+   Resume viewer / canvas
+   ------------------------- */
+.resume-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 6px;
+    background: linear-gradient(to bottom, #f6f6f6, #ececec);
+    border: 1px solid #d0d0d0;
+    margin-bottom: 10px;
+}
+
+.toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: white;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    border-radius: 3px;
+}
+
+.toolbar-btn:hover {
+    background: #f0f6ff;
+}
+
+.resume-canvas {
+    background: #9b9b9b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    min-height: 360px;
+    overflow: auto;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.resume-paper {
+    background: white;
+    width: 640px;
+    max-width: 90%;
+    height: auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    border: 1px solid #ddd;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resume-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #444;
+}
+
+.resume-paper img {
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+}
+
+.resume-paper img.zoomed {
+    transform: scale(1.5);
+    cursor: zoom-out;
+}
+
+/* -------------------------
+   Login screen
+   ------------------------- */
+.login-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Tahoma', sans-serif;
+    user-select: none;
+    background-color: #5a7edc;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.login-top-bar,
+.login-footer-bar {
+    height: 80px;
+    background: #00309c;
+    border-top: 2px solid #3f6fd6;
+    border-bottom: 2px solid #3f6fd6;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+}
+
+.login-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.login-left-col {
+    flex: 1;
+    text-align: right;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.xp-logo-container {
+    margin-bottom: 5px;
+}
+
+.xp-logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.xp-logo-main {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    font-size: 42px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.xp-logo-suffix {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    font-size: 24px;
+    color: #ff6600;
+    vertical-align: super;
+    margin-left: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.xp-logo-subtitle {
+    color: #cbd8f5;
+    font-size: 18px;
+    margin-top: -5px;
+    font-weight: bold;
+}
+
+.login-divider {
+    width: 2px;
+    height: 300px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4) 20%, rgba(255, 255, 255, 0.4) 80%, transparent);
+}
+
+.login-right-col {
+    flex: 1;
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.login-user-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.login-user-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar-box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid white;
+    border-radius: 4px;
+    overflow: hidden;
+    background: orange;
+    margin-right: 15px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.user-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-details {
+    color: white;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.user-status {
+    font-size: 12px;
+    color: #cbd8f5;
+}
+
+.turn-off-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.turn-off-btn:hover {
+    opacity: 1;
+}
+
+.turn-off-icon {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, #ff6b6b 40%, #c00 100%);
+    border: 2px solid white;
+    border-radius: 4px;
+    position: relative;
+}
+
+.turn-off-icon::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 2px;
+    height: 6px;
+    background: white;
+}
+
+.login-instructions {
+    font-size: 11px;
+    color: #9cb3e2;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* -------------------------
+   Explorer / File manager
+   ------------------------- */
+.explorer-toolbar {
+    background: var(--xp-silver);
+    border-bottom: 1px solid #d4d0c8;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 36px;
+}
+
+.explorer-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    color: black;
+}
+
+.explorer-btn:hover {
+    border-color: #b2b2b2;
+    background-color: #f0f0f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.explorer-btn-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.address-bar-row {
+    background: var(--xp-silver);
+    padding: 2px 5px 4px 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid #d4d0c8;
+    font-size: 11px;
+}
+
+.address-label {
+    color: #444;
+}
+
+.address-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #7f9db9;
+    padding: 1px 2px;
+}
+
+.address-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+
+.address-input {
+    border: none;
+    width: 100%;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    outline: none;
+}
+
+.explorer-body {
+    display: flex;
+    height: calc(100% - 65px);
+    background: white;
+}
+
+.explorer-sidebar {
+    width: 180px;
+    background: linear-gradient(to bottom, #7b9fe9 0%, #ffffff 100%);
+    padding: 10px;
+    overflow-y: auto;
+    border-right: 1px solid #d4d0c8;
+}
+
+.file-view {
+    flex: 1;
+    background: white;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* -------------------------
+   Carousel / Gallery overlay
+   ------------------------- */
+.gallery-overlay {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 30px);
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-image-container {
+    max-width: 90%;
+    max-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-img {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.gallery-btn {
+    background: var(--xp-silver);
+    border: 1px solid #fff;
+    border-right-color: #707070;
+    border-bottom-color: #707070;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.gallery-btn:active {
+    border: 1px solid #707070;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.gallery-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.xp-cert-slider {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #7f9db9;
+    padding: 15px 0;
+    margin-top: 10px;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.xp-cert-track {
+    display: flex;
+    /* Adjust width to fit 8 items (4 original + 4 duplicates) */
+    width: calc(180px * 8);
+    animation: loopCerts 25s linear infinite;
+}
+
+.xp-cert-item {
+    width: 160px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.xp-cert-img {
+    width: 120px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.1s;
+}
+
+.xp-cert-item:hover .xp-cert-img {
+    transform: scale(1.05);
+}
+
+.xp-cert-title {
+    font-size: 10px;
+    color: #003399;
+    /* Classic XP link color */
+    text-align: center;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.xp-cert-item:hover .xp-cert-title {
+    text-decoration: underline;
+}
+
+@keyframes loopCerts {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-180px * 4));
+    }
+
+    /* Snap back after 4 items */
+}
+
+.xp-cert-slider:hover .xp-cert-track {
+    animation-play-state: paused;
+}
+
+/* ... existing code ... */
+
+/* -------------------------
+   Education Section Styles
+   ------------------------- */
+.xp-edu-card {
+    background: linear-gradient(to top, #7ba0e9 0%, #ffffff 100%);
+    border: 1px solid #7f9db9;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.xp-edu-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-color: #0054e3;
+}
+
+.xp-edu-icon-bg {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 80px;
+    color: #0054e3;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.xp-edu-card:hover .xp-edu-icon-bg {
+    opacity: 0.1;
+}
+
+.xp-unit-tag {
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+    border: 1px solid #c0c0c0;
+    color: #444;
+    padding: 3px 8px;
+    font-size: 10px;
+    border-radius: 3px;
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+.xp-unit-tag:hover {
+    border-color: #0054e3;
+    background: #eef5ff;
+    color: #0054e3;
+}
+
+.xp-unit-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #3c813f;
+    /* XP Green */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Enhanced Start Menu Colors */
+.xp-start-divider {
+    height: 1px;
+    background: linear-gradient(to right, #eeeeee, #aaaaaa, #eeeeee);
+    margin: 4px 10px;
+}
+
+.xp-start-divider-blue {
+    height: 1px;
+    background: #95bdee;
+    margin: 4px 10px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Footer Icons */
+.footer-icon-logoff {
+    width: 22px;
+    height: 22px;
+    background: #f68c2d;
+    /* Orange Log Off */
+    border: 1px solid white;
+    border-radius: 3px;
+    position: relative;
+}
+
+.footer-icon-shutdown {
+    width: 22px;
+    height: 22px;
+    background: #e81123;
+    /* Red Shut Down */
+    border: 1px solid white;
+    border-radius: 3px;
+    position: relative;
+}
+
+/* Ensure the layout handles the footer correctly */
+.xp-start-footer {
+    justify-content: flex-end;
+    /* Aligns buttons to the right */
+    gap: 15px;
+}
+
+.xp-right-col .start-item-sm {
+    color: #001e4e;
+    font-size: 11px;
+}
+
+.xp-right-col .start-item-sm:hover {
+    background: #316ac5;
+    color: white;
+}
+
+/* ==================================================
+   RESPONSIVE / MOBILE STYLES (UPDATED)
+   ================================================== */
+@media screen and (max-width: 768px) {
+
+    /* --- Login Screen --- */
+    .login-content {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .login-divider {
+        width: 80%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.4);
+        margin: 10px 0;
+    }
+
+    .desktop-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    /* --- Windows (Full Screen Mode) --- */
+    .window {
+        width: 100% !important;
+        height: calc(100% - 30px) !important;
+        /* Full height minus taskbar */
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 !important;
+        border: none;
+        border-top: 2px solid #0054e3;
+    }
+
+    /* --- About Window Layout --- */
+    .window-body {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .xp-sidebar-col {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 140px;
+        /* Limit sidebar height */
+        overflow-y: auto;
+        border-right: none;
+        border-bottom: 1px solid #7f9db9;
+        flex-shrink: 0;
+    }
+
+    /* --- Projects/Explorer Layout (FIX FOR MISSING FILES) --- */
+    .explorer-body {
+        display: flex;
+        flex-direction: column !important;
+        height: 100% !important;
+    }
+
+    .explorer-sidebar {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 120px;
+        overflow-y: auto;
+        border-right: none;
+        border-bottom: 1px solid #d4d0c8;
+    }
+
+    .file-view {
+        flex: 1;
+        /* Forces it to fill remaining space */
+        height: auto !important;
+        overflow-y: auto;
+        background: white;
+    }
+
+    /* --- Gallery --- */
+    .gallery-overlay {
+        z-index: 99999;
+    }
+
+    .gallery-image-container {
+        width: 95%;
+    }
+}
+
+/* ==================================================
+   CRT / RETRO MONITOR EFFECTS
+   ================================================== */
+.crt-overlay {
+    background:
+        /* 1. Scanlines (Horizontal stripes) */
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2)),
+        /* 2. Vignette (Darker corners) */
+        radial-gradient(circle at center,
+            transparent 60%,
+            rgba(0, 0, 0, 0.4) 100%);
+    background-size: 100% 4px, 100% 100%;
+    /* 4px row height for scanlines */
+    pointer-events: none;
+    /* Allows clicking through the overlay */
+    animation: crtFlicker 0.15s infinite;
+}
+
+/* Optional: Slight screen flicker */
+@keyframes crtFlicker {
+    0% {
+        opacity: 0.97;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.98;
+    }
+}
+
+/* ==================================================
+   SYSTEM TRAY & CRT EFFECTS
+   ================================================== */
+
+/* Tray Buttons (CRT & Fullscreen) */
+.tray-btn {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(to bottom, #0aa0ff 0%, #0060d0 100%);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.tray-btn:hover {
+    filter: brightness(1.1);
+    background: linear-gradient(to bottom, #2daeff 0%, #0070e0 100%);
+}
+
+/* Clock Adjustments (Remove old margin since flex handles it) */
+#clock {
+    margin-left: 0;
+    padding: 0 15px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(to bottom, #0997ff 0%, #0053ee 100%);
+}
+
+/* ==================================================
+   CRT / RETRO MONITOR EFFECTS (Moved outside media query)
+   ================================================== */
+.crt-overlay {
+    background:
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2)),
+        radial-gradient(circle at center,
+            transparent 60%,
+            rgba(0, 0, 0, 0.4) 100%);
+    background-size: 100% 4px, 100% 100%;
+    pointer-events: none;
+    animation: crtFlicker 0.15s infinite;
+}
+
+@keyframes crtFlicker {
+    0% {
+        opacity: 0.97;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.98;
+    }
+}

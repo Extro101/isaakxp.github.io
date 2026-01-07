@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaak | Digital Designer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-top-bar"></div>
+
+        <div class="login-content">
+            <div class="login-left-col">
+                <div class="xp-logo-container">
+                    <img src="img/my_logo.png" alt="logo" class="xp-logo-image">
+                </div>
+            </div>
+
+            <div class="login-divider"></div>
+
+            <div class="login-right-col">
+                <div class="login-user-card" onclick="loginToDesktop()">
+                    <div class="user-avatar-box">
+                        <img src="img/him.png" alt="Isaak" class="user-avatar-img">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">Isaak</div>
+                        <div class="user-status">Type your password</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-footer-bar">
+            <div class="turn-off-btn">
+                <div class="turn-off-icon"></div>
+                <span>Turn off computer</span>
+            </div>
+            <div class="login-instructions">
+                Welcome to Isaak's Portfolio
+            </div>
+        </div>
+    </div>
+    <!-- Desktop Icons -->
+    <div class="desktop-container flex flex-col h-full items-start p-4">
+        <div class="desktop-icon" onclick="openWindow('about')">
+            <img src="img/chrome_icon.png" alt="Chrome" class="w-12 h-12 mb-1">
+            <span class="px-1 text-xs">My Profile</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('work')">
+            <img src="img/file_icon.png" alt="File" class="w-12 h-12 mb-1">
+            <span class="px-1 text-xs">Projects</span>
+        </div>
+        <div class="desktop-icon" onclick="contactClick()">
+            <img src="img/mail_icon.png" alt="Mail" class="w-12 h-12 mb-1">
+            <span class="px-1 text-xs">Contact Me</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('resume')">
+            <img src="img/word_icon.png" alt="Word" class="w-12 h-12 mb-1">
+            <span class="px-1 text-xs">Resume</span>
+        </div>
+    </div>
+
+    <!-- Windows -->
+    <!-- About Window -->
+    <div id="window-about" class="window flex flex-col"
+        style="width: 650px; height: 480px; top: 100px; left: 200px; z-index: 10;">
+
+        <div class="window-header">
+            <div class="flex items-center gap-2">
+                <span>About Isaak.exe</span>
+            </div>
+            <div class="window-controls">
+                <div class="control-btn btn-min" onclick="minimizeWindow('about')">_</div>
+                <div class="control-btn btn-max" onclick="toggleMaximize('about')">□</div>
+                <div class="control-btn btn-close" onclick="closeWindow('about')">X</div>
+            </div>
+        </div>
+
+        <div class="win-menu">
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">File
+                <div class="menu-dropdown">
+                    <div class="menu-action" onclick="saveWindow('about')">Save</div>
+                    <div class="menu-action" onclick="printWindow('about')">Print</div>
+                    <div class="menu-action" onclick="exitWindow('about')">Exit</div>
+                </div>
+            </div>
+            <div class="menu-btn menu-disabled">View</div>
+            <div class="menu-btn menu-disabled">Help</div>  
+        </div>
+
+        <div class="explorer-toolbar">
+            <div class="explorer-btn" onclick="goBack()">
+                <div
+                    class="w-5 h-5 bg-green-500 rounded-full text-white flex items-center justify-center font-bold text-[10px] border border-green-700">
+                    ←</div>
+                <span>Back</span>
+            </div>
+            <div class="explorer-btn" onclick="goUp()">
+                <div
+                    class="w-5 h-5 bg-yellow-400 rounded text-black flex items-center justify-center font-bold text-[10px] border border-yellow-600">
+                    ↑</div>
+                <span>Up</span>
+            </div>
+            <div class="w-[1px] h-6 bg-[#d4d0c8] border-r border-white mx-1"></div>
+            <div class="explorer-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </div>
+            <div class="explorer-btn">
+                <i class="fa-regular fa-folder-open"></i>
+                <span>Folders</span>
+            </div>
+        </div>
+
+        <div class="address-bar-row">
+            <span class="address-label">Address</span>
+            <div class="address-input-wrapper">
+                <img src="img/folder_icon.png" class="address-icon">
+                <input type="text" id="explorer-address" class="address-input"
+                    value="C:\My Documents\About Me\Full_Profile.doc" readonly>
+            </div>
+            <div class="explorer-btn" style="margin-left: 5px;">Go</div>
+        </div>
+
+        <div class="window-body"
+            style="display: flex; gap: 0; padding: 0; background: #ece9d8; flex: 1; min-height: 0; margin: 0; border: none;">
+
+            <div class="xp-sidebar-col"
+                style="width: 200px; padding: 10px; overflow-y: auto; flex-shrink: 0; background: linear-gradient(to bottom, #7b9fe9 0%, #ffffff 100%);">
+
+                <div class="xp-task-box">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>Social Links</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content">
+                        <div class="task-item"
+                            onclick="window.open('https://www.linkedin.com/in/isaak-campbell-779333307/', '_blank')">
+                            <i class="fa-brands fa-linkedin text-[#0077b5]"></i> LinkedIn
+                        </div>
+                        <div class="task-item" onclick="window.open('https://github.com/Extro101', '_blank')">
+                            <i class="fa-brands fa-github text-black"></i> Github
+                        </div>
+                        <div class="task-item" onclick="window.open('mailto:isaakcampb311@gmail.com', '_blank')">
+                            <i class="fa-solid fa-phone text-green-600"></i> Phone
+                        </div>
+                    </div>
+                </div>
+
+                <div class="xp-task-box mt-4">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>System Properties</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content">
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Location:</strong><br>Turramurra, NSW,
+                            Australia</div>
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Gender:</strong><br>Male</div>
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Age:</strong><br>21</div>
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Height</strong><br>6'1 ft</div>
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Languages</strong><br>- English<br>- Spanish
+                        </div>
+                        <div class="text-[11px] text-gray-600 mb-1"><strong>Roles:</strong><br>- Digital Designer<br>-
+                            Digital Developer<br>- Swimming Athlete</div>
+                    </div>
+                </div>
+
+                <div class="xp-task-box mt-4">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>Software Experience</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content">
+                        <div class="task-item cursor-default"><i
+                                class="devicon-blender-original text-orange-500 w-4 text-center"></i> Blender</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-canva-plain text-blue-500 w-4 text-center"></i> Canva</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-figma-plain text-purple-500 w-4 text-center"></i> Figma</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-git-plain text-red-500 w-4 text-center"></i> Git</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-illustrator-plain text-[#FF9A00] w-4 text-center"></i> Illustrator</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-photoshop-plain text-[#31A8FF] w-4 text-center"></i> Photoshop</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-premierepro-plain text-[#9999FF] w-4 text-center"></i> Premiere</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-python-plain text-blue-600 w-4 text-center"></i> Python</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-react-original text-blue-400 w-4 text-center"></i> React / JS</div>
+                        <div class="task-item cursor-default"><i
+                                class="devicon-unity-plain text-blue-500 w-4 text-center"></i> Unity</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white flex-1 p-4 overflow-y-auto h-full border-l border-[#7f9db9]">
+
+                <div id="section-summary" class="mb-8">
+                    <div class="flex items-center gap-4 mb-4 border-b border-gray-200 pb-4">
+                        <div> <img src="img/him.png" alt="User Profile"
+                                class="w-16 h-16 object-cover rounded border border-blue-300 shadow-sm"></div>
+                        <div>
+                            <h1 class="text-xl font-bold text-gray-800">Isaak Campbell</h1>
+                            <p class="text-sm text-gray-500">Digital Designer & Developer</p>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xs text-blue-800 uppercase mb-2 border-b border-gray-300 max-w-2xl">System
+                        Information</h3>
+                    <p class="text-xs text-gray-700 leading-relaxed mb-4 max-w-2xl">
+                        I am passionate about digital design, with hands-on experience creating eye-catching posters,
+                        engaging videos, and experimenting with layouts and colour palettes using modern design tools.
+                        <br><br>
+                        Through collaborating on school projects, developing promotional materials for local events, and
+                        designing social media graphics, I've fine-tuned my attention to detail and deepened my grasp of
+                        visual communication principles.
+                        <br><br>
+                        I see digital design as both a problem-solving tool and a way to tell stories that connect with
+                        audiences, and I'm eager to bring my adaptability, creativity, and fresh perspective to a
+                        workplace where I can learn from industry professionals and contribute effective solutions.
+                        <br><br>
+                        My commitment to excellence extends to elite sports, where I play and coach Underwater Hockey.
+                        Coaching youth under 19 has built my leadership and communication, while competing nationally
+                        has fostered resilience, teamwork, and adaptability.
+                        <br><br>
+                        Balancing academics, design, and sports has sharpened my time management and discipline,
+                        qualities I bring to all my endeavors.
+                    </p>
+                </div>
+
+                <div id="section-experience" class="mb-8">
+                    <h3 class="font-bold text-xs text-blue-800 uppercase mb-3 border-b border-gray-300 max-w-2xl">
+                        Professional Experience
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4 max-w-2xl mb-6">
+                        <div
+                            class="flex items-start gap-3 p-2 border border-transparent hover:bg-[#eff5ff] hover:border-[#7f9db9] rounded transition-all">
+                            <img src="img/mini/dude1.png" alt="Proveritas"
+                                class="w-14 h-14 rounded border border-gray-300 shadow-sm flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h4 class="text-[11px] font-bold text-gray-800 truncate">Digital Designer</h4>
+                                <p class="text-[10px] text-blue-700 font-bold">Proveritas Pty Ltd</p>
+                                <p class="text-[10px] text-gray-500 leading-tight mt-1">Preparing to apply design skills
+                                    to industry-leading commercial projects.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 p-2 border border-transparent hover:bg-[#eff5ff] hover:border-[#7f9db9] rounded transition-all">
+                            <img src="img/mini/dude2.png" alt="ALDI"
+                                class="w-14 h-14 rounded border border-gray-300 shadow-sm flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h4 class="text-[11px] font-bold text-gray-800 truncate">Retail Assistant</h4>
+                                <p class="text-[10px] text-blue-700 font-bold">ALDI Australia</p>
+                                <p class="text-[10px] text-gray-500 leading-tight mt-1">Managed fast-paced inventory and
+                                    customer transactions with precision.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 p-2 border border-transparent hover:bg-[#eff5ff] hover:border-[#7f9db9] rounded transition-all">
+                            <img src="img/mini/dude3.png" alt="Zeus"
+                                class="w-14 h-14 rounded border border-gray-300 shadow-sm flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h4 class="text-[11px] font-bold text-gray-800 truncate">Hospitality Staff</h4>
+                                <p class="text-[10px] text-blue-700 font-bold">Zeus Street Greek</p>
+                                <p class="text-[10px] text-gray-500 leading-tight mt-1">Delivered high-quality service
+                                    in a high-volume, team-oriented environment.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 p-2 border border-transparent hover:bg-[#eff5ff] hover:border-[#7f9db9] rounded transition-all">
+                            <img src="img/mini/dude4.png" alt="Logistics"
+                                class="w-14 h-14 rounded border border-gray-300 shadow-sm flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h4 class="text-[11px] font-bold text-gray-800 truncate">Labourer/Pick/Packer</h4>
+                                <p class="text-[10px] text-blue-700 font-bold">360 Personnel & Evaton</p>
+                                <p class="text-[10px] text-gray-500 leading-tight mt-1">Optimized delivery routes and
+                                    ensured 100% on-time fulfillment rates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-education" class="mb-8">
+                    <h3 class="font-bold text-xs text-blue-800 uppercase mb-2 border-b border-gray-300 max-w-2xl">
+                        Education</h3>
+
+                    <div class="xp-edu-card max-w-2xl group mb-6">
+                        <i class="fa-solid fa-graduation-cap xp-edu-icon-bg"></i>
+                        <div class="flex gap-4 items-start relative z-10">
+                            <div
+                                class="w-14 h-14 bg-white border border-[#d4d0c8] shadow-sm flex items-center justify-center p-1 rounded-sm">
+                                <i class="fa-solid fa-building-columns text-3xl text-[#003399]"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold text-[#003399] leading-tight">Bachelor of Information
+                                    Technology</h4>
+                                <div class="text-xs font-bold text-gray-700 mt-1">Macquarie University</div>
+                                <div class="flex flex-wrap gap-3 mt-2 text-[11px] text-gray-600">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fa-solid fa-calendar-days text-[#0054e3]"></i>
+                                        <span>2024 - 2027</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <i class="fa-solid fa-location-dot text-[#e81123]"></i>
+                                        <span>North Ryde, NSW</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="relative z-10 mt-3 bg-[#eff5ff] border-l-4 border-[#0054e3] px-3 py-2 text-xs text-gray-800">
+                            <span class="font-bold text-[#0054e3]">Major:</span> Artificial Intelligence
+                        </div>
+                        <div class="relative z-10 mt-4">
+                            <div class="text-[10px] uppercase font-bold text-gray-400 mb-2 tracking-wide">My Units</div>
+                            <div class="flex flex-wrap gap-2">
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Advanced Web Development
+                                </div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Algorithms and Data
+                                    Structures</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Artificial Intelligence for
+                                    Text and Vision</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Business Applications of
+                                    Artificial Intelligence</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Business Information Systems
+                                </div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Computer Programming</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Computer Science</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Cyber Security</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Data Communications</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Data Science</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Database Design & Management
+                                </div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Intelligent Machines, Ethics
+                                    and Law</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Knowledge, Planning and
+                                    Decision Making</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> PACE: Computing Industry
+                                    Project</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Software Engineering</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Statistics</div>
+                                <div class="xp-unit-tag"><span class="xp-unit-dot"></span> Technology Management</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-certs" class="pb-8">
+                    <h3 class="font-bold text-xs text-blue-800 uppercase mb-2 border-b border-gray-300 max-w-2xl">
+                        Verified Certifications</h3>
+                    <div class="xp-cert-slider max-w-2xl">
+                        <div class="xp-cert-track">
+                            <a href="https://www.service.nsw.gov.au/transaction/apply-for-a-working-with-children-check"
+                                target="_blank" class="xp-cert-item">
+                                <img src="img/cert/wwcc.png" alt="WWCC" class="xp-cert-img">
+                                <span class="xp-cert-title">Working with Children Check</span>
+                            </a>
+                            <a href="https://www.service.nsw.gov.au/guide/responsible-service-of-alcohol-rsa"
+                                target="_blank" class="xp-cert-item">
+                                <img src="img/cert/rsa.jpg" alt="RSA" class="xp-cert-img">
+                                <span class="xp-cert-title">RSA Certification</span>
+                            </a>
+                            <a href="https://www.sportintegrity.gov.au/" target="_blank" class="xp-cert-item">
+                                <img src="img/cert/sia.png" alt="SIA" class="xp-cert-img">
+                                <span class="xp-cert-title">Sport Integrity Australia</span>
+                            </a>
+                            <a href="https://www.harvard.edu/" target="_blank" class="xp-cert-item">
+                                <img src="img/cert/harv.png" alt="Harvard" class="xp-cert-img">
+                                <span class="xp-cert-title">Harvard CS50P</span>
+                            </a>
+                            <a href="#" class="xp-cert-item">
+                                <img src="img/cert/wwcc.png" alt="WWCC" class="xp-cert-img">
+                                <span class="xp-cert-title">Working with Children Check</span>
+                            </a>
+                            <a href="#" class="xp-cert-item">
+                                <img src="img/cert/rsa.jpg" alt="RSA" class="xp-cert-img">
+                                <span class="xp-cert-title">RSA Certification</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Work Window -->
+    <div id="window-work" class="window"
+        style="width: 640px; height: 480px; top: 150px; left: 300px; display: none; z-index: 11;">
+
+        <div class="window-header">
+            <div class="flex items-center gap-2">
+                <span>Projects</span>
+            </div>
+            <div class="window-controls">
+                <div class="control-btn btn-min" onclick="minimizeWindow('work')">_</div>
+                <div class="control-btn btn-max" onclick="toggleMaximize('work')">□</div>
+                <div class="control-btn btn-close" onclick="closeWindow('work')">X</div>
+            </div>
+        </div>
+
+        <div class="win-menu">
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">File</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Edit</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">View</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Favorites</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Tools</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Help</div>
+            <div class="ml-auto flex items-center pr-2">
+                <img src="img/windows_flag.png" class="w-4 h-4 opacity-70" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="explorer-toolbar">
+            <div class="explorer-btn" onclick="goBack()">
+                <div
+                    class="w-5 h-5 bg-green-500 rounded-full text-white flex items-center justify-center font-bold text-[10px] border border-green-700">
+                    ←</div>
+                <span>Back</span>
+            </div>
+            <div class="explorer-btn" onclick="goUp()">
+                <div
+                    class="w-5 h-5 bg-yellow-400 rounded text-black flex items-center justify-center font-bold text-[10px] border border-yellow-600">
+                    ↑</div>
+                <span>Up</span>
+            </div>
+            <div class="w-[1px] h-6 bg-[#d4d0c8] border-r border-white mx-1"></div>
+            <div class="explorer-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </div>
+            <div class="explorer-btn">
+                <i class="fa-regular fa-folder-open"></i>
+                <span>Folders</span>
+            </div>
+        </div>
+
+        <div class="address-bar-row">
+            <span class="address-label">Address</span>
+            <div class="address-input-wrapper">
+                <img src="img/folder_icon.png" class="address-icon"> <input type="text" id="explorer-address"
+                    class="address-input" value="C:\My Documents\Projects" readonly>
+            </div>
+            <div class="explorer-btn" style="margin-left: 5px;">Go</div>
+        </div>
+
+        <div class="explorer-body">
+
+            <div class="explorer-sidebar">
+                <div class="xp-task-box">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>File and Folder Tasks</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content">
+                        <div class="task-item"><span class="text-blue-500 mr-1">↪</span> Make a new folder</div>
+                        <div class="task-item"><span class="text-blue-500 mr-1">🌐</span> Publish to Web</div>
+                        <div class="task-item"><span class="text-blue-500 mr-1">✉</span> Share this folder</div>
+                    </div>
+                </div>
+
+                <div class="xp-task-box mt-3">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>Other Places</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content">
+                        <div class="task-item" onclick="navigateExplorer('root')">
+                            <img src="img/folder_icon.png" class="task-icon"> Projects
+                        </div>
+                        <div class="task-item">
+                            <img src="img/chrome_icon.png" class="task-icon"> My Network
+                        </div>
+                        <div class="task-item">
+                            <img src="img/file_icon.png" class="task-icon"> My Documents
+                        </div>
+                    </div>
+                </div>
+
+                <div class="xp-task-box mt-3">
+                    <div class="task-header" onclick="toggleTaskBox(this)">
+                        <span>Details</span>
+                        <div class="task-arrow">▲</div>
+                    </div>
+                    <div class="task-content text-[10px]">
+                        <div id="folder-details-text">Select an item to view its description.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="file-view">
+                <div id="file-grid" class="file-grid">
+                </div>
+            </div>
+        </div>
+
+        <div id="gallery-overlay" class="gallery-overlay">
+            <div class="gallery-close" onclick="closeGallery()">X</div>
+            <div class="gallery-image-container">
+                <img id="gallery-img" src="" class="gallery-img">
+            </div>
+            <div class="text-white mt-2 text-sm" id="gallery-caption">Image 1 of 5</div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" onclick="prevImage()">❮ Previous</button>
+                <button class="gallery-btn" onclick="nextImage()">Next ❯</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Window -->
+    <div id="window-contact" class="window"
+        style="width: 580px; height: 450px; top: 100px; left: 150px; display: none; z-index: 10;">
+        <div class="window-header">
+            <div class="flex items-center gap-2">
+                <img src="img/mail_icon.png" class="header-icon">
+                <span>Contact Me</span>
+            </div>
+            <div class="window-controls">
+                <div class="control-btn btn-min" onclick="minimizeWindow('contact')">_</div>
+                <div class="control-btn btn-max" onclick="toggleMaximize('contact')">□</div>
+                <div class="control-btn btn-close" onclick="closeWindow('contact')">X</div>
+            </div>
+        </div>
+
+        <div class="win-menu bg-[#ece9d8] flex items-center px-1 border-b border-[#d4d0c8] text-xs select-none">
+            <div class="menu-btn hover:bg-[#316ac5] hover:text-white px-2 py-1">File</div>
+            <div class="menu-btn hover:bg-[#316ac5] hover:text-white px-2 py-1">Edit</div>
+            <div class="menu-btn hover:bg-[#316ac5] hover:text-white px-2 py-1">View</div>
+            <div class="menu-btn hover:bg-[#316ac5] hover:text-white px-2 py-1">Tools</div>
+            <div class="menu-btn hover:bg-[#316ac5] hover:text-white px-2 py-1">Help</div>
+            <div class="ml-auto text-gray-400 px-2">
+                <i class="fa-brands fa-windows text-lg"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-[#ece9d8] border-b border-[#d4d0c8] p-2 flex items-center gap-1 text-[11px] select-none h-[50px]">
+            <div id="contact-send-btn"
+                class="no-drag flex items-center gap-1 px-2 py-1 border border-transparent hover:border-[#7f9db9] hover:bg-white active:bg-[#e0e0e0] cursor-pointer group">
+                <div class="relative">
+                    <img src="img/mail_icon.png" class="w-6 h-6">
+                    <div class="absolute -right-1 -bottom-1 bg-green-500 rounded-full w-2 h-2 border border-white">
+                    </div>
+                </div>
+                <span class="group-hover:text-black text-gray-700">Send Message</span>
+            </div>
+
+            <div class="w-[1px] h-6 bg-[#a0a0a0] mx-2 border-r border-white"></div>
+
+            <div class="flex items-center gap-3 text-gray-500 mx-1">
+                <i class="fa-solid fa-scissors hover:text-black cursor-pointer"></i>
+                <i class="fa-regular fa-copy hover:text-black cursor-pointer"></i>
+                <i class="fa-solid fa-paste hover:text-black cursor-pointer"></i>
+            </div>
+
+            <div class="w-[1px] h-6 bg-[#a0a0a0] mx-2 border-r border-white"></div>
+
+            <a href="https://www.linkedin.com/in/isaak-campbell-779333307/" target="_blank"
+                class="flex items-center gap-2 px-2 py-1 border border-transparent hover:border-[#7f9db9] hover:bg-white text-gray-700 no-underline">
+                <i class="fa-brands fa-linkedin text-[#0077b5] text-xl"></i>
+                <span>LinkedIn</span>
+            </a>
+        </div>
+
+        <div class="window-body bg-[#ece9d8] flex flex-col p-3 gap-2 text-xs"
+            style="padding: 12px; border:none; height: calc(100% - 105px);">
+
+            <div class="flex items-center">
+                <label class="w-14 text-right pr-3 text-gray-500">From:</label>
+                <input id="contact-from" type="text" value="Your Email App" readonly
+                    class="w-full border border-[#7f9db9] px-2 py-0.5 bg-[#f5f5f5] text-gray-700 cursor-default shadow-inner">
+            </div>
+
+            <div class="h-[1px] bg-white border-b border-[#d4d0c8] my-0.5"></div>
+
+            <div class="flex items-center">
+                <label class="w-14 text-right pr-3 text-gray-500">Subject:</label>
+                <input id="contact-subject" type="text" value="Inquiry from Portfolio" readonly
+                    class="w-full border border-[#7f9db9] px-2 py-0.5 bg-[#f5f5f5] text-gray-700 cursor-default shadow-inner">
+            </div>
+
+            <textarea id="contact-message" readonly
+                class="flex-1 mt-2 w-full border border-[#7f9db9] p-2 bg-[#f5f5f5] text-gray-700 cursor-default resize-none font-sans shadow-inner">
+Click 'Send Message' above to open your local email client and get in touch!
+    </textarea>
+        </div>
+
+        <div
+            class="bg-[#ece9d8] border-t border-[#a0a0a0] px-2 py-0.5 text-[10px] text-gray-600 cursor-default flex items-center shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
+            Compose a message to Isaak
+        </div>
+    </div>
+
+    <!-- Resume Window -->
+    <div id="window-resume" class="window" style="width: 420px; top: 120px; left: 260px; display: none; z-index: 13;">
+        <div class="window-header">
+            <div class="flex items-center gap-2">
+                <span>My Resume</span>
+            </div>
+            <div class="window-controls">
+                <div class="control-btn btn-min" onclick="minimizeWindow('resume')">_</div>
+                <div class="control-btn btn-max" onclick="toggleMaximize('resume')">□</div>
+                <div class="control-btn btn-close" onclick="closeWindow('resume')">X</div>
+            </div>
+        </div>
+        <div class="win-menu">
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">File
+                <div class="menu-dropdown">
+                    <div class="menu-action" onclick="saveWindow('resume')">Save</div>
+                    <div class="menu-action" onclick="printWindow('resume')">Print</div>
+                    <div class="menu-action" onclick="exitWindow('resume')">Exit</div>
+                </div>
+            </div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">View
+                <div class="menu-dropdown">
+                    <div class="menu-action" onclick="toggleMaximize('resume')">Maximise</div>
+                    <div class="menu-action" onclick="minimizeWindow('resume')">Minimise</div>
+                </div>
+            </div>
+            <div class="menu-btn menu-disabled">Help
+                <div class="menu-dropdown disabled">
+                    <div class="menu-action disabled">(Disabled)</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="resume-toolbar">
+                <div class="toolbar-btn" onclick="toggleResumeZoom()">🔍 Zoom</div>
+                <div class="toolbar-btn" onclick="downloadResume()">💾 Save PDF</div>
+                <div class="toolbar-btn" onclick="printResume()">🖨️ Print</div>
+                <div class="toolbar-btn" onclick="openWindow('contact')">✉️ Hire Me</div>
+            </div>
+            <div class="resume-canvas">
+                <div class="resume-paper" id="resume-container">
+                    <img src="img/isaak_resume_picture.png" id="resume-image" alt="Resume Preview"
+                        onclick="toggleResumeZoom()">
+                </div>
+            </div>
+            <div class="resume-hint">Tip: Use Save PDF for the high-quality document.</div>
+        </div>
+    </div>
+
+    <!-- Notepad Window -->
+    <div id="window-notepad" class="window"
+        style="width: 400px; height: 300px; top: 150px; left: 350px; display: none; z-index: 15;">
+        <div class="window-header">
+            <div class="flex items-center gap-2">
+                <img src="img/file_icon.png" class="header-icon"> <span id="notepad-title">Notepad</span>
+            </div>
+            <div class="window-controls">
+                <div class="control-btn btn-min" onclick="minimizeWindow('notepad')">_</div>
+                <div class="control-btn btn-max" onclick="toggleMaximize('notepad')">□</div>
+                <div class="control-btn btn-close" onclick="closeWindow('notepad')">X</div>
+            </div>
+        </div>
+
+        <div class="win-menu">
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">File</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Edit</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Format</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">View</div>
+            <div class="menu-btn" onclick="toggleWindowMenu(this,event)">Help</div>
+        </div>
+
+        <div class="window-body" style="padding: 0; overflow: hidden; height: calc(100% - 50px);">
+            <textarea id="notepad-content"
+                class="w-full h-full resize-none border-none outline-none p-4 text-sm leading-relaxed bg-white" readonly
+                style="font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, system-ui, 'Helvetica Neue', Arial, sans-serif; font-size:14px; color:#111827; -webkit-font-smoothing:antialiased; line-height:1.6;">
+            </textarea>
+        </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="startMenu">
+        <div class="xp-start-header">
+            <div class="start-header-user-icon">
+                <img src="img/him.png" alt="User">
+            </div>
+            <span class="start-header-name">Isaak Campbell</span>
+        </div>
+
+        <div class="xp-start-body">
+            <div class="xp-left-col">
+                <div class="start-item" onclick="openWindow('about')">
+                    <img src="img/chrome_icon.png" class="w-8 h-8 mr-2">
+                    <div class="start-label">
+                        <span class="font-bold">Internet</span>
+                        <span class="start-subtext text-gray-500">My Profile</span>
+                    </div>
+                </div>
+                <div class="start-item" onclick="openWindow('resume')">
+                    <img src="img/word_icon.png" class="w-8 h-8 mr-2">
+                    <div class="start-label">
+                        <span class="font-bold">E-mail</span>
+                        <span class="start-subtext text-gray-500">Resume & CV</span>
+                    </div>
+                </div>
+
+                <div class="xp-start-divider"></div>
+
+                <div class="start-item-sm" onclick="openWindow('work')">
+                    <img src="img/file_icon.png" class="w-6 h-6 mr-2">
+                    <span>My Projects</span>
+                </div>
+                <div class="start-item-sm" onclick="openWindow('notepad')">
+                    <img src="img/file_icon.png" class="w-6 h-6 mr-2">
+                    <span>Notepad</span>
+                </div>
+
+                <div class="mt-auto border-t border-gray-200 p-2">
+                    <div class="start-item-sm font-bold flex justify-between items-center group">
+                        <span>All Programs</span>
+                        <span class="text-green-600">▶</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="xp-right-col">
+                <div class="start-item-sm font-bold">My Documents</div>
+                <div class="start-item-sm font-bold">My Recent Documents</div>
+                <div class="start-item-sm font-bold">My Pictures</div>
+                <div class="start-item-sm font-bold">My Music</div>
+
+                <div class="xp-start-divider-blue"></div>
+
+                <div class="start-item-sm">Control Panel</div>
+                <div class="start-item-sm">Printers and Faxes</div>
+
+                <div class="xp-start-divider-blue"></div>
+
+                <div class="start-item-sm">Help and Support</div>
+                <div class="start-item-sm">Search</div>
+                <div class="start-item-sm">Run...</div>
+            </div>
+        </div>
+
+        <div class="xp-start-footer">
+            <div class="xp-footer-button" onclick="logout()">
+                <div class="footer-icon-logoff"></div>
+                <span>Log Off</span>
+            </div>
+            <div class="xp-footer-button" onclick="logout()">
+                <div class="footer-icon-shutdown"></div>
+                <span>Turn Off Computer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="start-button" onclick="toggleStartMenu()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Microsoft_Windows_logo_%282012%29.svg/2048px-Microsoft_Windows_logo_%282012%29.svg.png"
+                class="w-4 h-4 mr-2 filter brightness-0 invert" alt="">
+            start
+        </div>
+
+        <div class="flex gap-1 ml-4 flex-1 overflow-hidden" id="taskbar-items">
+        </div>
+
+        <div class="flex h-full items-center ml-auto">
+            <div class="tray-btn" onclick="toggleSounds()" title="Toggle Sound">
+                <span id="volume-icon">🔊</span>
+            </div>
+
+            <div class="tray-btn" onclick="toggleCRT()" title="Toggle CRT Effect">
+                📺
+            </div>
+            <div class="tray-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                ⤢
+            </div>
+            <div id="clock">12:00 PM</div>
+        </div>
+    </div>
+    <!-- CRT Overlay -->
+    <div id="crt-overlay" class="crt-overlay hidden pointer-events-none fixed inset-0 z-[999999] w-full h-full"></div>
+</body>
+
+</html>
