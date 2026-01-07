@@ -270,7 +270,7 @@ const fileSystem = {
             { id: 'websites', name: 'Websites', type: 'folder', icon: 'img/file_icon.png' },
             { id: 'graphics', name: 'Graphics', type: 'folder', icon: 'img/file_icon.png' },
             { id: 'unity', name: 'Game', type: 'folder', icon: 'img/file_icon.png' },
-            { id: 'unity', name: 'Media', type: 'folder', icon: 'img/file_icon.png' }
+            { id: 'media', name: 'Media', type: 'folder', icon: 'img/file_icon.png' }
         ]
     },
     'websites': {
@@ -346,10 +346,10 @@ As a national competitor and a coach for the Under-19 youth team, I realized the
             }
         ]
     },
-        'websites': {
-        name: 'Websites',
+    'media': {
+        name: 'Media',
         parent: 'root',
-        path: 'C:\\My Documents\\Projects\\Websites',
+        path: 'C:\\My Documents\\Projects\\Media',
         items: [
             {
                 id: 'nationals',
@@ -704,3 +704,4 @@ function toggleCRT() {
     }
 
 }
+
